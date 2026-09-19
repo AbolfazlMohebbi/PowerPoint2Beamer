@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert a PowerPoint (.pptx) presentation into a simple Beamer LaTeX project.
+"""PowerPoint2Beamer: convert a PowerPoint (.pptx) presentation into a simple Beamer LaTeX project.
 
 Output:
     OUTDIR/main.tex                     preamble + \\input of every slide
@@ -7,7 +7,15 @@ Output:
     OUTDIR/images/slide_<i>_image_<j>.* pictures and video poster frames
 
 Usage:
-    python pptx2beamer.py deck.pptx [-o OUTDIR] [--theme Madrid] [--color auto]
+    python powerpoint2beamer.py deck.pptx [-o OUTDIR] [--theme Madrid] [--color auto]
+
+Author:
+    Abolfazl Mohebbi, PhD., P. Eng.
+    Professor in Mechanical and Biomedical Engineering
+    Polytechnique Montréal
+    abolfazl.mohebbi@polymtl.ca
+
+License: MIT (see LICENSE)
 """
 
 import argparse

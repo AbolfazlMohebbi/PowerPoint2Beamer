@@ -1,11 +1,11 @@
-# PowerPoint to Beamer
+# PowerPoint2Beamer
 
 Two small Python scripts that turn a PowerPoint presentation (`.pptx`) into a LaTeX Beamer presentation.
 
 | Script | What it does |
 |---|---|
-| `pptx2beamer.py` | Converts the whole presentation to Beamer. |
-| `pptx2tikz.py` | Optional. Redraws the block diagrams on the slides you choose in TikZ, so you can edit them in LaTeX. |
+| `powerpoint2beamer.py` | Converts the whole presentation to Beamer. |
+| `powerpoint2tikz.py` | Optional. Redraws the block diagrams on the slides you choose in TikZ, so you can edit them in LaTeX. |
 
 ---
 
@@ -24,7 +24,7 @@ PowerPoint is optional. On Windows, if PowerPoint is installed, it is used to tu
 ## 2. Convert a presentation
 
 ```bash
-python pptx2beamer.py "My Talk.pptx"
+python powerpoint2beamer.py "My Talk.pptx"
 ```
 
 This creates a folder called `My Talk_beamer`:
@@ -56,7 +56,7 @@ Compile `main.tex` with `pdflatex` or on Overleaf.
 Example:
 
 ```bash
-python pptx2beamer.py "My Talk.pptx" -o Talk --theme Warsaw --color exact
+python powerpoint2beamer.py "My Talk.pptx" -o Talk --theme Warsaw --color exact
 ```
 
 To change the style later, just edit the `\usetheme{...}` and `\usecolortheme{...}` lines in `main.tex`.
@@ -80,7 +80,7 @@ Charts and SmartArt are not converted. A `% skipped` comment shows where they we
 After step 2, you can replace diagram images with TikZ drawings that you can edit. Give the slide numbers:
 
 ```bash
-python pptx2tikz.py "My Talk.pptx" --slides 21,22,50 --project "My Talk_beamer"
+python powerpoint2tikz.py "My Talk.pptx" --slides 21,22,50 --project "My Talk_beamer"
 ```
 
 You can also give slide file names, for example `--slides slide_21.tex slide_22.tex`.
@@ -105,3 +105,16 @@ It works for block diagrams (blocks, summing junctions with +/−, feedback loop
 - Slide `i` in PowerPoint is `slides/slide_i.tex` in the Beamer project.
 - If a slide is too full in Beamer, edit its `slides/slide_i.tex` file. Each file is short and simple.
 - If you run into a LaTeX error, the message names the slide file and line number to look at.
+
+---
+
+## Author
+
+**Abolfazl Mohebbi, PhD., P. Eng.**
+Professor in Mechanical and Biomedical Engineering
+Polytechnique Montréal
+[abolfazl.mohebbi@polymtl.ca](mailto:abolfazl.mohebbi@polymtl.ca)
+
+## License
+
+MIT. See [LICENSE](LICENSE).
