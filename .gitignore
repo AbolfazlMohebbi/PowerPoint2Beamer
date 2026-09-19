@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Converted presentations (course material)
+*_beamer/
+Cours2_beamer/
+
+# PowerPoint files
+*.pptx
+~$*
+
+# LaTeX build files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.synctex.gz
+*.pdf
