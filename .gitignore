@@ -20,3 +20,8 @@ Cours2_beamer/
 *.vrb
 *.synctex.gz
 *.pdf
+
+# ...except the demo in examples/, which is part of the repository
+!examples/demo.pptx
+!examples/demo_beamer/
+!examples/demo_beamer/main.pdf

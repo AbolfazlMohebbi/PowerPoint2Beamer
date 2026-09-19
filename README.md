@@ -9,6 +9,54 @@ Two small Python scripts that turn a PowerPoint presentation (`.pptx`) into a La
 
 ---
 
+## See it in action
+
+These screenshots come from the demo deck in [`examples/`](examples/), converted with one command and compiled with no manual edits. The PowerPoint slide is on the left, and the Beamer result is on the right.
+
+**Title page, and an outline built from the PowerPoint sections**
+
+![Title and outline](docs/screenshots/title_outline.png)
+
+**Bullets, bold, italic and colour.** Red text becomes `\alert{}`; other colours are kept.
+
+![Text formatting](docs/screenshots/text.png)
+
+**Equations from PowerPoint's equation editor become real LaTeX math**
+
+![Equations](docs/screenshots/equations.png)
+
+**Pictures, with the text beside them as in PowerPoint**
+
+![Layout with a picture](docs/screenshots/layout.png)
+
+**Tables**
+
+![Table](docs/screenshots/table.png)
+
+**Block diagrams redrawn as editable TikZ** (`powerpoint2tikz.py`)
+
+![Block diagram](docs/screenshots/diagram.png)
+
+**Native charts become pgfplots**
+
+![Chart](docs/screenshots/chart.png)
+
+**Click animations become Beamer overlays**
+
+![Animation](docs/screenshots/animation.png)
+
+To reproduce the demo:
+
+```bash
+python examples/make_demo.py
+python powerpoint2beamer.py examples/demo.pptx -o examples/demo_beamer --compile
+python powerpoint2tikz.py examples/demo.pptx --slides 6 --project examples/demo_beamer
+```
+
+The result, with its PDF, is in [`examples/demo_beamer/`](examples/demo_beamer/).
+
+---
+
 ## 1. Install (once)
 
 You need Python 3. Then run:
@@ -50,28 +98,39 @@ Compile `main.tex` with `pdflatex` or on Overleaf.
 | `-o` | `-o Talk` | Name of the output folder. |
 | `--theme` | `--theme Warsaw` | Beamer theme. The default is `Madrid`. |
 | `--color` | `--color beaver` | Colour theme. The default, `auto`, picks the Beamer colours closest to your slides; `exact` uses your slides' own main colour. |
+| `--compile` | | Compile the result into `main.pdf`, report any error with its slide file and line, and fix slides that are too full. |
+| `--sections` | `--sections none` | Where `\section`s come from. The default, `auto`, uses PowerPoint sections, then "Section Header" slides, then numbered titles like `2.1 ...`. |
+| `--no-outline` | | Don't add an outline slide after the title slide. |
+| `--language` | `--language french` | Language for hyphenation and dates. The default, `auto`, detects it from the slides. |
 | `--no-render` | | Don't use PowerPoint to draw diagrams; keep only their text. |
 | `--list-themes` | | Show all theme names. |
 
 Example:
 
 ```bash
-python powerpoint2beamer.py "My Talk.pptx" -o Talk --theme Warsaw --color exact
+python powerpoint2beamer.py "My Talk.pptx" -o Talk --theme Warsaw --color exact --compile
 ```
 
 To change the style later, just edit the `\usetheme{...}` and `\usecolortheme{...}` lines in `main.tex`.
 
+`--compile` needs a LaTeX engine: `pdflatex` (TeX Live or MiKTeX), `latexmk`, or [Tectonic](https://tectonic-typesetting.github.io).
+
 ### What gets converted
 
 - **Titles and bullet lists**, with bold, italic and links.
+- **Coloured text**: red text becomes `\alert{...}`; other colours are kept. Equations are always black.
 - **Equations** made with PowerPoint's equation editor become real LaTeX math.
+- **Click animations** become Beamer overlays, so bullets and pictures appear one click at a time, as in PowerPoint.
+- **Sections** become `\section`s, with an outline slide.
+- **Charts** (line, bar, column, scatter) become pgfplots charts in `charts/slide_i_chart_j.tex`. Other chart types are saved as images.
 - **Pictures**, saved as `slide_i_image_j`.
 - **Videos**: only their preview image is kept.
-- **Tables**.
+- **Tables**. Wide tables are scaled to fit.
 - **Drawn diagrams** (boxes and arrows) are saved as images.
 - **Speaker notes**.
+- **Slides that are too full** get `[shrink]`, or are split over several frames (`[allowframebreaks]`).
 
-Charts and SmartArt are not converted. A `% skipped` comment shows where they were.
+SmartArt is not converted. A `% skipped` comment shows where it was.
 
 ---
 

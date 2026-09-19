@@ -1,0 +1,18 @@
+\begin{tikzpicture}[block/.append style={minimum width=1.79cm, minimum height=1.15cm}, sum/.append style={minimum size=0.64cm}]
+% blocks / sums
+\node[sum] (s1) at (1.9,-0.6) {};
+\node[block] (C) at (4.1,-0.6) {\textit{C(s)}};
+\node[block] (G) at (6.95,-0.6) {\textit{G(s)}};
+% signals
+\node (R) at (0.35,-0.6) {\textit{R(s)}};
+\node (Y) at (10.45,-0.6) {\textit{Y(s)}};
+% connections
+\draw[->] (R.east) -- (s1.west);
+\draw[->] (s1.east) -- (C.west);
+\draw[->] (C.east) -- (G.west);
+\draw[->] (G.east) -- (Y.west);
+\draw[->] (G.east) -- ++(0.77,0) node[branch]{} -- ++(0,-1.66) -| (s1.south);
+% signs
+\node[sign] at ([shift={(-0.37,0.37)}]s1.center) {$+$};
+\node[sign] at ([shift={(-0.37,-0.37)}]s1.center) {$-$};
+\end{tikzpicture}
